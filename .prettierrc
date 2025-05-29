@@ -1,0 +1,18 @@
+{
+  "printWidth": 100,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+  "importOrder": [
+    "<BUILTIN_MODULES>",
+    "",
+    "^react",
+    "^next",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@/(.*)$",
+    "^[.]"
+  ],
+  "importOrderCaseSensitive": true,
+  "tailwindFunctions": ["cva"]
+}
