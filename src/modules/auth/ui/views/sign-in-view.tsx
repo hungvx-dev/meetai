@@ -129,7 +129,7 @@ function SignInView() {
                     Or continue with
                   </span>
                 </div>
-                <div className="grid-col-2 grid gap-4">
+                <div className="grid grid-cols-2 gap-4">
                   <Button
                     disabled={isLoading}
                     variant="outline"
@@ -158,7 +158,7 @@ function SignInView() {
               </div>
             </form>
           </Form>
-          <div className="relative hidden flex-col items-center justify-center gap-y-4 bg-radial from-cyan-500 to-cyan-700 md:flex">
+          <div className="relative hidden flex-col items-center justify-center gap-y-4 bg-radial from-sky-500 to-sky-700 md:flex">
             <Image src="/logo.svg" alt="meet.at logo" width={92} height={92} />
             <p className="text-2xl font-semibold text-white">Meet.AI</p>
           </div>
