@@ -20,14 +20,15 @@ import {
 import { DashboardUserButton } from './dashboard-user-button';
 
 const firstSections = [
-  { icon: VideoIcon, label: 'Meetings', href: 'meetings' },
-  { icon: BotIcon, label: 'Agents', href: 'agents' },
+  { icon: VideoIcon, label: 'Meetings', href: '/meetings' },
+  { icon: BotIcon, label: 'Agents', href: '/agents' },
 ];
 
 const secondSections = [{ icon: StarIcon, label: 'Upgrade', href: 'upgrade' }];
 
 export function DashboardSidebar() {
   const pathname = usePathname();
+
   return (
     <Sidebar>
       <SidebarHeader className="text-sidebar-accent-foreground">
