@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OctagonAlertIcon } from 'lucide-react';
 import { z } from 'zod';
@@ -35,7 +36,6 @@ const formSchema = z
   });
 
 function SignUpView() {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,6 +48,23 @@ function SignUpView() {
     },
   });
 
+  const onSocial = async (provider: 'github' | 'google') => {
+    setError(null);
+    setIsLoading(true);
+    await authClient.signIn.social(
+      {
+        provider,
+        callbackURL: '/',
+      },
+      {
+        onError({ error }) {
+          setError(error.message);
+        },
+      },
+    );
+    setIsLoading(false);
+  };
+
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setError(null);
     setIsLoading(true);
@@ -57,11 +74,9 @@ function SignUpView() {
         name: data.name,
         email: data.email,
         password: data.password,
+        callbackURL: '/',
       },
       {
-        onSuccess() {
-          router.push('/');
-        },
         onError({ error }) {
           setError(error.message);
         },
@@ -143,7 +158,7 @@ function SignUpView() {
                   </Alert>
                 )}
                 <Button disabled={isLoading} type="submit" className="w-full">
-                  Sign in
+                  Sign up
                 </Button>
                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                   <span className="bg-card text-muted-foreground relative z-10 px-2">
@@ -151,11 +166,23 @@ function SignUpView() {
                   </span>
                 </div>
                 <div className="grid-col-2 grid gap-4">
-                  <Button disabled={isLoading} variant="outline" type="button" className="w-full">
-                    Google
+                  <Button
+                    disabled={isLoading}
+                    variant="outline"
+                    type="button"
+                    className="w-full"
+                    onClick={() => onSocial('google')}
+                  >
+                    <FaGoogle />
                   </Button>
-                  <Button disabled={isLoading} variant="outline" type="button" className="w-full">
-                    Github
+                  <Button
+                    disabled={isLoading}
+                    variant="outline"
+                    type="button"
+                    className="w-full"
+                    onClick={() => onSocial('github')}
+                  >
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className="text-center text-sm">
@@ -168,7 +195,7 @@ function SignUpView() {
             </form>
           </Form>
           <div className="relative hidden flex-col items-center justify-center gap-y-4 bg-radial from-cyan-500 to-cyan-700 md:flex">
-            <img src="/logo.svg" alt="logo" className="h-[92px] w-[92px]" />
+            <Image src="/logo.svg" alt="meet.at logo" width={92} height={92} />
             <p className="text-2xl font-semibold text-white">Meet.AI</p>
           </div>
         </CardContent>
