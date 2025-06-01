@@ -62,7 +62,7 @@ export function DashboardUserButton() {
           )}
           <div className="flex min-w-0 flex-1 flex-col gap-0.5 overflow-hidden text-left">
             <p className="w-full truncate text-sm">{data.user.name}</p>
-            <p className="w-full truncate text-xs">{data.user.email}</p>
+            <p className="text-muted-foreground w-full truncate text-xs">{data.user.email}</p>
           </div>
           <ChevronDownIcon className="size-3 shrink-0" />
         </DrawerTrigger>
@@ -102,7 +102,7 @@ export function DashboardUserButton() {
         )}
         <div className="flex min-w-0 flex-1 flex-col gap-0.5 overflow-hidden text-left">
           <p className="w-full truncate text-sm">{data.user.name}</p>
-          <p className="w-full truncate text-xs">{data.user.email}</p>
+          <p className="text-muted-foreground w-full truncate text-xs">{data.user.email}</p>
         </div>
         <ChevronDownIcon className="size-3 shrink-0" />
       </DropdownMenuTrigger>
