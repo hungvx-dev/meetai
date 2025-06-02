@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChevronRightIcon, DeleteIcon, MoreVerticalIcon, PencilIcon, TrashIcon } from 'lucide-react';
+import { ChevronRightIcon, MoreVerticalIcon, PencilIcon, TrashIcon } from 'lucide-react';
 
 import {
   Breadcrumb,
