@@ -1,0 +1,13 @@
+import { EmptyState } from '@/components/empty-state';
+
+export function ProcessingState() {
+  return (
+    <div className="flex flex-col items-center justify-center gap-y-8 rounded-lg bg-white px-4 py-5">
+      <EmptyState
+        title="Meeting completed"
+        description="This meeting was completed, a summary will apear soon"
+        image="/processing.svg"
+      />
+    </div>
+  );
+}
