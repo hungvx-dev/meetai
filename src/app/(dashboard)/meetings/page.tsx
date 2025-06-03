@@ -7,14 +7,10 @@ import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import { ErrorState } from '@/components/error-state';
 import { LoadingState } from '@/components/loading-state';
 import { auth } from '@/lib/auth';
-import { AgentIdView } from '@/modules/agents/ui/views/agent-id-view';
+import { MeetingsView } from '@/modules/meetings/ui/view/meetings-view';
 import { getQueryClient, trpc } from '@/trpc/server';
 
-type Props = {
-  params: Promise<{ agentId: string }>;
-};
-
-export default async function Page({ params }: Props) {
+export default async function Page() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -23,20 +19,20 @@ export default async function Page({ params }: Props) {
     redirect('/sign-in');
   }
 
-  const { agentId } = await params;
-
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(trpc.agents.getOne.queryOptions({ id: agentId }));
+  void queryClient.prefetchQuery(trpc.meetings.getMany.queryOptions());
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Suspense
-        fallback={<LoadingState title="Loading Agent" description="This may take a few seconds" />}
+        fallback={
+          <LoadingState title="Loading Meetings" description="This may take a few seconds" />
+        }
       >
         <ErrorBoundary
-          fallback={<ErrorState title="Error Loading Agent" description="Please try again later" />}
+          fallback={<ErrorState title="Failed to loading" description="Please try again later" />}
         >
-          <AgentIdView agentId={agentId} />
+          <MeetingsView />
         </ErrorBoundary>
       </Suspense>
     </HydrationBoundary>
