@@ -18,8 +18,6 @@ type Props = {
 };
 
 export default async function Page({ searchParams }: Props) {
-  const filters = await loadSearchParams(searchParams);
-
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -28,6 +26,7 @@ export default async function Page({ searchParams }: Props) {
     redirect('/sign-in');
   }
 
+  const filters = await loadSearchParams(searchParams);
   const queryClient = getQueryClient();
   void queryClient.prefetchQuery(trpc.agents.getMany.queryOptions(filters));
   return (

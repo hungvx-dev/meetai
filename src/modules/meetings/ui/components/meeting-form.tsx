@@ -121,7 +121,7 @@ export function MeetingForm({ onSuccess, onCancel, initialValues }: Props) {
                           <GenerateAvatar
                             seed={agent.name}
                             variant="botttsNeutral"
-                            className="size6 border"
+                            className="size-6 border"
                           />
                           <span>{agent.name}</span>
                         </div>
